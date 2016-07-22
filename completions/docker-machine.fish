@@ -14,7 +14,7 @@ function __fish_docker_machine_help_commands
     end
 end
 
-function __fish_docker_machine_machines --description 'Lists all available docker machines with status'
+function __fish_docker_machine_machines --description 'Lists all available docker machines with their status'
     command docker-machine ls | sed -E '1d;s/[[:space:]]+/;/g;s/;$//'
 end
 
@@ -36,7 +36,7 @@ end
 for ms in (__fish_docker_machine_machines)
     set m (echo $ms | cut -d";" -f 1)  # machine 
     set s (echo $ms | cut -d";" -f 2-)  # machine state
-    for c in (__fish_docker_machine_commands_helps | cut -f 1 | sed '/help/d;/env/d')
+    for c in (__fish_docker_machine_commands_helps | cut -f 1 | sed '/help/d;/env/d;/active/d;/create/d;/ls/d')
         complete -f -c docker-machine -n "__fish_docker_machine_using_command $c" -a "'""$m""'" -d "'""$s""'"
     end
 end 
