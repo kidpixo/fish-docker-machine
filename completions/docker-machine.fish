@@ -38,7 +38,6 @@ for ms in (__fish_docker_machine_machines)
     set s (echo $ms | cut -d";" -f 2-)  # machine state
     for c in (__fish_docker_machine_commands_helps | cut -f 1 | sed '/help/d;/env/d')
         complete -f -c docker-machine -n "__fish_docker_machine_using_command $c" -a "'""$m""'" -d "'""$s""'"
-        echo complete -f -c docker-machine -n "__fish_docker_machine_using_command $c" "'""$m""'" -d "'""$s""'"
     end
 end 
 
